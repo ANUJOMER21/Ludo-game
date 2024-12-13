@@ -34,21 +34,8 @@ jobs:
         run: |
           mv app/build/outputs/apk/debug/app-debug.apk Ludo.apk
 
-      - name: Install MegaTools
-        run: |
-          sudo apt-get update && sudo apt-get install -y megatools
-
-      - name: Upload to Mega
-        env:
-          MEGA_EMAIL: anujomer111@gmail.com
-          MEGA_PASSWORD: An@240702
-        run: |
-          megarm /Root/Ludo.apk || true
-          megasync Ludo.apk /Root/
-
-      - name: Confirm Upload
-        env:
-          MEGA_EMAIL: anujomer111@gmail.com
-          MEGA_PASSWORD: An@240702
-        run: |
-          megals /Root | grep Ludo.apk
+      - name: Upload APK as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-apk
+          path: Ludo.apk
