@@ -1,0 +1,54 @@
+name: Build and Upload Debug APK
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-debug-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/wrapper
+            ~/.gradle/caches
+          key: gradle-${{ runner.os }}-wrapper-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Rename APK
+        run: |
+          mv app/build/outputs/apk/debug/app-debug.apk Ludo.apk
+
+      - name: Install MegaTools
+        run: |
+          sudo apt-get update && sudo apt-get install -y megatools
+
+      - name: Upload to Mega
+        env:
+          MEGA_EMAIL: ${{ secrets.MEGA_EMAIL }}
+          MEGA_PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+        run: |
+          megarm /Root/Ludo.apk || true
+          megasync Ludo.apk /Root/
+
+      - name: Confirm Upload
+        env:
+          MEGA_EMAIL: ${{ secrets.MEGA_EMAIL }}
+          MEGA_PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+        run: |
+          megals /Root | grep Ludo.apk
