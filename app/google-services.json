@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "100771082685",
+    "firebase_url": "https://ludo-game-1f645-default-rtdb.firebaseio.com",
+    "project_id": "ludo-game-1f645",
+    "storage_bucket": "ludo-game-1f645.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100771082685:android:d1467598b6796cc4f862d4",
+        "android_client_info": {
+          "package_name": "com.royalkingmatka.ludogame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUZwTGFVU4mDTGM02E9t87gpFVmA8tYIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
