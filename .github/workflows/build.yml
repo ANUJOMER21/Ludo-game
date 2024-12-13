@@ -40,15 +40,15 @@ jobs:
 
       - name: Upload to Mega
         env:
-          MEGA_EMAIL: ${{ secrets.MEGA_EMAIL }}
-          MEGA_PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+          MEGA_EMAIL: anujomer111@gmail.com
+          MEGA_PASSWORD: An@240702
         run: |
           megarm /Root/Ludo.apk || true
           megasync Ludo.apk /Root/
 
       - name: Confirm Upload
         env:
-          MEGA_EMAIL: ${{ secrets.MEGA_EMAIL }}
-          MEGA_PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+          MEGA_EMAIL: anujomer111@gmail.com
+          MEGA_PASSWORD: An@240702
         run: |
           megals /Root | grep Ludo.apk
